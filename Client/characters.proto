@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+package characters;
+
+service CharacterService {
+  rpc GetCharacterById (CharacterIdRequest) returns (Character);
+}
+
+message CharacterIdRequest {
+  int32 id = 1;
+}
+
+message Character {
+  int32 id = 1;
+  string name = 2;
+  string nationality = 3;
+}
