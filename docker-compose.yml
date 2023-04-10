@@ -65,7 +65,7 @@ services:
         "--bind",
         "redis2",
         "--maxmemory 2mb",
-        "--maxmemory-policy allkeys-lru",
+        "--maxmemory-policy allkeys-lfu",
         "--loglevel verbose",
         "--protected-mode no"
       ]
@@ -86,7 +86,7 @@ services:
         "--bind",
         "redis3",
         "--maxmemory 2mb",
-        "--maxmemory-policy allkeys-lru",
+        "--maxmemory-policy allkeys-random",
         "--loglevel verbose",
         "--protected-mode no"
       ]

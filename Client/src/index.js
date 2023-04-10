@@ -25,16 +25,10 @@ function menu() {
             case '1':
                 apiRequest();
                 rl.close();
-                setTimeout(() => {
-                    menu();
-                }, 500); // Esperar medio segundo antes de volver a mostrar el menú
                 break;
             case '2':
                 fuerzaBruta();
                 rl.close();
-                setTimeout(() => {
-                    menu();
-                }, 500); // Esperar medio segundo antes de volver a mostrar el menú
                 break;
             case '3':
                 rl.question('Ingrese el ID del personaje: ', (id) => {
