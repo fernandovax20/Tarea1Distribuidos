@@ -1,6 +1,6 @@
 const apiRequest = require('./TestingApi');
 const fuerzaBruta = require('./TestingApiBruto');
-const getCharacterById = require('./cacheQuery');
+const runGrpcRequests = require('./cacheQuery');
 const readline = require('readline');
 
 
@@ -31,13 +31,8 @@ function menu() {
                 rl.close();
                 break;
             case '3':
-                rl.question('Ingrese el ID del personaje: ', (id) => {
-                    getCharacterById(parseInt(id));
-                    rl.close();
-                    setTimeout(() => {
-                        menu();
-                    }, 2000); // Esperar medio segundo antes de volver a mostrar el menú
-                });
+                runGrpcRequests();
+                rl.close();
                 break;
             case '4':
                 console.log('Saliendo...');

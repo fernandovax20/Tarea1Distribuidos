@@ -35,27 +35,19 @@ const packageDefinition = protoLoader.loadSync(filePath, {
 const charactersProto = grpc.loadPackageDefinition(packageDefinition).characters;
 const server = new grpc.Server();
 
-async function fetchAllCharacters() {
+async function fetchCharacter(id) {
   try {
-    const response = await axios.get(API_URL);
-    return response.data;
+    const response = await axios.get(API_URL+'/'+id);
+    const character = response.data;
+    return {
+      id: character.id,
+      name: character.name,
+      nationality: character.nationality,
+    };
   } catch (error) {
     console.error(error);
-    return [];
-  }
-}
-
-function getCharacterById(characters, id) {
-  const character = characters.find((c) => c.id === id.toString());
-  if (!character) {
     return null;
   }
-
-  return {
-    id: character.id,
-    name: character.name,
-    nationality: character.nationality,
-  };
 }
 
 server.addService(charactersProto.CharacterService.service, {
@@ -71,8 +63,7 @@ server.addService(charactersProto.CharacterService.service, {
         console.log('Character found in cache:', cachedCharacter);
         callback(null, cachedCharacter);
       } else {
-        const allCharacters = await fetchAllCharacters();
-        const character = getCharacterById(allCharacters, id);
+        const character = await fetchCharacter(id);
   
         if (character) {
           console.log('Character found in API:', character);

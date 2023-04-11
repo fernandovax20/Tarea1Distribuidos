@@ -4,13 +4,18 @@ const plot = require('nodeplotlib');
 const numRequests = 500;
 const results = [];
 
+function getRandomId(min, max) {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+}
+
+
 function fuerzaBruta() {
 
   for (let i = 0; i < numRequests; i++) {
     const start = Date.now();
-
+    const randomId = getRandomId(1, 175);
     axios
-      .get('https://stand-by-me.herokuapp.com/api/v1/characters')
+      .get(`https://stand-by-me.herokuapp.com/api/v1/characters/${randomId}`)
       .then((res) => {
         const elapsed = Date.now() - start;
         console.log(`Solicitud ${i + 1}: ${elapsed} ms`);
