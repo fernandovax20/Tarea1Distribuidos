@@ -27,6 +27,10 @@ services:
     - app-network
 
   ###################-REDIS-##########################
+  #politicas de cache
+  # 1 "--maxmemory-policy allkeys-lru",
+  # 2 "--maxmemory-policy allkeys-lfu",
+  # 3 "--maxmemory-policy allkeys-random",
   redis1:
     container_name: redis1
     image: bitnami/redis:7.0.10-debian-11-r6
@@ -42,10 +46,11 @@ services:
         "redis-server",
         "--bind",
         "redis1",
-        "--maxmemory 2mb",
+        "--maxmemory 1mb",
         "--maxmemory-policy allkeys-lru",
         "--loglevel verbose",
-        "--protected-mode no"  
+        "--protected-mode no",
+        "--save ''",  
       ]
 
 
@@ -64,10 +69,11 @@ services:
         "redis-server",
         "--bind",
         "redis2",
-        "--maxmemory 2mb",
-        "--maxmemory-policy allkeys-lfu",
+        "--maxmemory 1mb",
+        "--maxmemory-policy allkeys-lru",
         "--loglevel verbose",
-        "--protected-mode no"
+        "--protected-mode no",
+        "--save ''",
       ]
 
   redis3:
@@ -85,10 +91,11 @@ services:
         "redis-server",
         "--bind",
         "redis3",
-        "--maxmemory 2mb",
-        "--maxmemory-policy allkeys-random",
+        "--maxmemory 1mb",
+        "--maxmemory-policy allkeys-lru",
         "--loglevel verbose",
-        "--protected-mode no"
+        "--protected-mode no",
+        "--save ''",
       ]
 
 ##################-NETWORKS-##########################

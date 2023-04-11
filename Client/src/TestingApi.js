@@ -1,19 +1,24 @@
 const axios = require('axios');
 const plot = require('nodeplotlib');
 
-const maxRequests = 100;
+const maxRequests = 200;
 const requestInterval = 300; // 300 milisegundos
 let requestCount = 0;
 let results = [];
 let throughputResults = [];
+
+function getRandomId(min, max) {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+}
 
 function apiRequest() {
     // Función para realizar una solicitud a la API
     function makeRequest() {
         const start = Date.now();
         let size = 0; // Variable para llevar registro del tamaño de los datos transferidos
+        const randomId = getRandomId(1, 175);
         axios
-            .get('https://stand-by-me.herokuapp.com/api/v1/characters', { responseType: 'stream' })
+            .get(`https://stand-by-me.herokuapp.com/api/v1/characters/${randomId}`, { responseType: 'stream' })
             .then((res) => {
                 res.data.on('data', (chunk) => {
                     size += chunk.length;
