@@ -12,8 +12,10 @@ function menu() {
     console.log('Seleccione una opción:');
     console.log('1. Realizar pruebas de rendimiento');
     console.log('2. Reedición de pruebas de rendimiento con fuerza bruta');
-    console.log('3. Buscar personaje por ID');
-    console.log('4. Salir');
+    console.log('3. Buscar personaje por ID sin repeticion con reinicio');
+    console.log('4. Buscar personaje por ID completamente aleatorio');
+    console.log('5. Buscar personaje por ID aleatoreio pero con ids populares');
+    console.log('6. Salir');
 
     const rl = readline.createInterface({
         input: process.stdin,
@@ -31,10 +33,18 @@ function menu() {
                 rl.close();
                 break;
             case '3':
-                runGrpcRequests();
+                runGrpcRequests(1);
                 rl.close();
                 break;
             case '4':
+                runGrpcRequests(2);
+                rl.close();
+                break;
+            case '5':
+                runGrpcRequests(3);
+                rl.close();
+                break;
+            case '6':
                 console.log('Saliendo...');
                 rl.close();
                 break;

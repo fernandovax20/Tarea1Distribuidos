@@ -1,18 +1,7 @@
 version: '1.0'
 
+#Borrar cache: docker system prune --all --force --volumes
 services:
-
-  ###################-CLIENT-##########################
-  #client:
-  #  container_name: client
-  #  build: ./Client
-  #  ports:
-  #    - "3000:3000"
-  #  depends_on:
-  #    - grpc-server
-  #  networks:
-  #  - app-network
-  
   ###################-GRPC_SERVER-##########################
   grpc-server:
     container_name: grpc-server
@@ -46,7 +35,7 @@ services:
         "redis-server",
         "--bind",
         "redis1",
-        "--maxmemory 1mb",
+        "--maxmemory 980kb",
         "--maxmemory-policy allkeys-lru",
         "--loglevel verbose",
         "--protected-mode no",
@@ -69,7 +58,7 @@ services:
         "redis-server",
         "--bind",
         "redis2",
-        "--maxmemory 1mb",
+        "--maxmemory 980kb",
         "--maxmemory-policy allkeys-lru",
         "--loglevel verbose",
         "--protected-mode no",
@@ -91,7 +80,7 @@ services:
         "redis-server",
         "--bind",
         "redis3",
-        "--maxmemory 1mb",
+        "--maxmemory 980kb",
         "--maxmemory-policy allkeys-lru",
         "--loglevel verbose",
         "--protected-mode no",
