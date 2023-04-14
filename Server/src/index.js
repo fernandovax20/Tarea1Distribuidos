@@ -6,7 +6,7 @@ const filePath = path.join(__dirname, '../characters.proto');
 const Redis = require('ioredis');
 
 const API_URL = 'https://stand-by-me.herokuapp.com/api/v1/characters';
-const CACHE_TTL = 15; // 5 minutos en segundos
+const CACHE_TTL = 300; // 5 minutos en segundos
 
 const redisClient1 = new Redis({ host: 'redis1', port: 6379, enableReadyCheck: false });
 const redisClient2 = new Redis({ host: 'redis2', port: 6379, enableReadyCheck: false });
